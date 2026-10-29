@@ -1,0 +1,231 @@
+/* ===== Estrellita Fugaz · lila pastel ===== */
+:root {
+    --fondo-1: #E8DDF8; --fondo-2: #FAF0FC;
+    --carta: #FDFAFF; --borde: #DCCDF3;
+    --titulo: #5B4380; --texto: #6A5688;
+    --boton: #CBB8EE; --boton-2: #B79DE6; --boton-texto: #43296B;
+    --volver: #9C7BD8;
+    --sombra: 0 10px 30px rgba(120, 90, 180, .18);
+    --pata: 0 4px 0 rgba(120, 90, 180, .22);
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+[hidden] { display: none !important; }
+img[src=""] { display: none; }
+p:empty { display: none; }
+
+html {
+    -webkit-text-size-adjust: 100%;
+    min-height: 100%;
+    background-color: #EFE4F9;
+    background-image: linear-gradient(160deg, var(--fondo-1), var(--fondo-2));
+}
+body {
+    margin: 0;
+    min-height: 100vh; min-height: 100dvh;
+    display: flex; justify-content: center; align-items: flex-start;
+    padding: max(16px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right))
+             max(88px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
+    font-family: ui-rounded, "Nunito", "Quicksand", "Segoe UI", system-ui, sans-serif;
+    color: var(--texto);
+    line-height: 1.5;
+}
+body:has(dialog[open]) { overflow: hidden; }
+
+/* ----- Carta ----- */
+.card {
+    width: 100%; max-width: 560px;
+    background: var(--carta);
+    border: 2px solid var(--borde);
+    border-radius: 28px;
+    padding: 22px 18px 18px;
+    box-shadow: var(--sombra);
+}
+.card > header { text-align: center; margin-bottom: 14px; }
+h1 { margin: 0; color: var(--titulo); font-size: clamp(1.7rem, 7vw, 2.3rem); line-height: 1.15; }
+h1::before, h1::after { content: "✦"; font-size: .5em; color: var(--boton-2); margin: 0 .5em; vertical-align: middle; }
+h2 { margin: 0; color: var(--titulo); font-size: 1.2rem; line-height: 1.2; }
+
+.foto-perfil { display: flex; justify-content: center; margin: 6px 0 20px; }
+.foto-perfil img {
+    width: 132px; height: 132px;
+    border-radius: 50%; object-fit: cover;
+    border: 4px solid #fff;
+    box-shadow: 0 0 0 3px var(--boton), var(--sombra);
+}
+
+/* ----- Botones base ----- */
+button {
+    font: inherit; font-weight: 700; letter-spacing: .3px;
+    color: var(--boton-texto);
+    background: var(--boton);
+    border: 0; border-radius: 16px;
+    padding: 13px 12px; min-height: 46px;
+    display: inline-flex; align-items: center; justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: var(--pata);
+    transition: transform .15s, box-shadow .15s;
+    -webkit-appearance: none; appearance: none;
+}
+@media (hover: hover) { button:hover { transform: translateY(-2px); } }
+button:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(120, 90, 180, .22); }
+button:focus-visible { outline: 3px solid var(--titulo); outline-offset: 2px; }
+
+/* ----- Menú principal (4 botones) ----- */
+.botones-principales { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.botones-principales button { min-height: 64px; font-size: 1rem; }
+.botones-principales button:nth-child(1) { background: #D6C7F5; }
+.botones-principales button:nth-child(2) { background: #F5C9E6; }
+.botones-principales button:nth-child(3) { background: #C6D6F7; }
+.botones-principales button:nth-child(4) { background: #FFD3E6; }
+
+/* ----- Secciones ----- */
+.seccion > header { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 14px; }
+.foto-mini {
+    width: 46px; height: 46px;
+    border-radius: 50%; object-fit: cover;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 2px var(--boton);
+}
+nav { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 16px; }
+nav button {
+    font-size: .66rem; letter-spacing: 0;
+    padding: 10px 2px; min-height: 44px;
+    border-radius: 12px; background: #E6DBF8;
+    box-shadow: 0 3px 0 rgba(120, 90, 180, .18);
+}
+nav button[data-ir="menu"] { background: var(--volver); color: #fff; }
+
+.mensaje { background: #F4ECFD; border-radius: 16px; margin: 12px 0; }
+.mensaje:has(p:empty) { display: none; }
+.mensaje p { margin: 0; padding: 14px 16px; text-align: center; }
+
+/* ----- Cartas con fecha ----- */
+.lista-carta, .lista-fiesta, .lista-pareja { display: grid; gap: 14px; margin: 14px 0; }
+.lista-carta { grid-template-columns: 1fr; }
+.lista-fiesta, .lista-pareja { grid-template-columns: 1fr 1fr; }
+.carta { text-align: center; }
+.carta button { width: 100%; min-height: 56px; }
+.aviso { margin: 8px 2px 0; font-size: .8rem; color: #B0507A; }
+.fecha-texto { margin: 6px 2px 0; font-size: .74rem; }
+
+button.bloqueado { opacity: .62; filter: saturate(.45); }
+button.bloqueado::after { content: "🔒"; margin-left: .4em; }
+
+/* Festividades: color pastel + emoji */
+.fiesta-halloween button { background: #FFC59B; } .fiesta-halloween button::before { content: "🎃"; margin-right: .4em; }
+.fiesta-muertos button   { background: #E9BEF2; } .fiesta-muertos button::before   { content: "💀"; margin-right: .4em; }
+.fiesta-gracias button   { background: #EBCFAE; } .fiesta-gracias button::before   { content: "🦃"; margin-right: .4em; }
+.fiesta-velitas button   { background: #FFF0A8; } .fiesta-velitas button::before   { content: "🕯️"; margin-right: .4em; }
+.fiesta-navidad button   { background: #BFE6C9; } .fiesta-navidad button::before   { content: "🎄"; margin-right: .4em; }
+.fiesta-nuevo button     { background: #BFD8F7; } .fiesta-nuevo button::before     { content: "🎆"; margin-right: .4em; }
+
+/* Pareja */
+.carta-semana button { background: #FFD3E6; } .carta-semana button::before { content: "💗"; margin-right: .4em; }
+.carta-mes button    { background: #D6C7F5; } .carta-mes button::before    { content: "💜"; margin-right: .4em; }
+
+/* ----- Galería ----- */
+.galeria { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 14px 0; }
+.galeria img {
+    width: 100%; aspect-ratio: 1;
+    object-fit: cover; display: block;
+    background: #EDE3FA;
+    border: 3px solid #fff; border-radius: 14px;
+    box-shadow: 0 3px 10px rgba(120, 90, 180, .25);
+    cursor: pointer;
+    transition: transform .15s;
+}
+.galeria img:active { transform: scale(.96); }
+@media (hover: hover) { .galeria img:hover { transform: scale(1.04); } }
+
+/* Visor */
+.visor {
+    width: 100%; height: 100%;
+    max-width: none; max-height: none;
+    margin: 0; border: 0;
+    background: transparent;
+    padding: 0;
+    color: var(--titulo);
+}
+.visor::backdrop {
+    background: rgba(61, 43, 90, .92);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+}
+.visor[open] {
+    display: flex; align-items: center; justify-content: center;
+    padding: max(60px, env(safe-area-inset-top)) 10px max(20px, env(safe-area-inset-bottom));
+}
+.visor figure {
+    margin: 0; width: 100%;
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.visor img {
+    max-width: 100%;
+    max-height: calc(100vh - 150px);
+    max-height: calc(100dvh - 150px);
+    object-fit: contain;
+    border: 4px solid #fff; border-radius: 18px;
+    background: #fff;
+    user-select: none; -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+.visor figcaption {
+    background: #fff; color: var(--titulo);
+    padding: 6px 16px; border-radius: 999px;
+    font-weight: 700; font-size: .9rem;
+}
+.visor-ant, .visor-sig, .visor-cerrar {
+    position: absolute;
+    width: 46px; height: 46px; min-height: 0; padding: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .92);
+    font-size: 1.7rem; line-height: 1;
+}
+.visor-ant { left: max(8px, env(safe-area-inset-left)); top: 50%; margin-top: -23px; }
+.visor-sig { right: max(8px, env(safe-area-inset-right)); top: 50%; margin-top: -23px; }
+.visor-cerrar {
+    top: max(12px, env(safe-area-inset-top));
+    right: max(12px, env(safe-area-inset-right));
+    font-size: 1.1rem;
+    background: #fff;
+}
+.visor-ant:active, .visor-sig:active { transform: scale(.92); }
+
+/* ----- Música ----- */
+.btn-musica {
+    position: fixed;
+    right: max(14px, env(safe-area-inset-right));
+    bottom: max(16px, env(safe-area-inset-bottom));
+    z-index: 20;
+    width: 50px; height: 50px; min-height: 0; padding: 0;
+    border-radius: 50%;
+    background: var(--boton-2); color: #fff;
+    font-size: 1.4rem;
+}
+.btn-musica.sonando { animation: latido 1.8s ease-in-out infinite; }
+@keyframes latido { 50% { transform: scale(1.1); } }
+
+/* ----- Footer ----- */
+footer { margin-top: 24px; padding-top: 14px; border-top: 2px dotted var(--borde); text-align: center; font-size: .8rem; }
+footer p { margin: 0; }
+footer strong { color: var(--titulo); }
+
+/* ----- Pantallas más grandes ----- */
+@media (min-width: 420px) {
+    nav button { font-size: .72rem; }
+}
+@media (min-width: 700px) {
+    body { padding-top: 40px; }
+    .card { max-width: 640px; padding: 30px 28px 24px; }
+    .foto-perfil img { width: 160px; height: 160px; }
+    nav button { font-size: .8rem; }
+    .galeria { grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .visor img { max-height: calc(100vh - 170px); }
+    .visor-ant { left: 24px; }
+    .visor-sig { right: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+}
